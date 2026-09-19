@@ -7,16 +7,16 @@ export async function getItemFromFoundry(item_id) {
 
 export async function addItem(itemId, instant, slot) {
     const item = await getItemFromFoundry(itemId);
-    const itemData = duplicate(item);
+    const itemData = foundry.utils.deepClone(item.toObject());
     if (slot) {
-        itemData.system.sheet = slot
+        itemData.system.sheet = slot;
     }
-    await instant.sheet._onDropItemCreate(itemData)
+    await instant.sheet._onDropItemCreate(itemData);
 }
 
 export async function attrRoll() {
-    var roll = await new Roll('3d6kh2').roll();
-    return await roll.total;
+    const roll = await new Roll('3d6kh2').evaluate();
+    return roll.total;
 }
 
 export async function drawFromTable(tableName) {
@@ -34,7 +34,7 @@ export async function drawFromTable(tableName) {
         return;
     }
 
-    const buffer = await table.roll();
+    const buffer = await table.draw();
 
     return buffer.results[0].text;
 }

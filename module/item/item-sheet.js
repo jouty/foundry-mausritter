@@ -6,7 +6,7 @@ export class MausritterItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["mausritter", "sheet", "item"],
       width: 520,
       height: 480,
@@ -30,8 +30,14 @@ export class MausritterItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    return data.data;
+    const context = super.getData();
+    const item = this.item;
+    return {
+      ...item.toObject(false),
+      cssClass: context.cssClass,
+      editable: context.editable,
+      item: item,
+    };
   }
 
   // /**

@@ -105,25 +105,23 @@ Hooks.once('init', async function () {
   let disposition = CONST.TOKEN_DISPOSITIONS.NEUTRAL;
 
   if (createData.type == "creature") {
-    disposition = CONST.TOKEN_DISPOSITIONS.HOSTILE
+    disposition = CONST.TOKEN_DISPOSITIONS.HOSTILE;
   }
 
-  // Set wounds, advantage, and display name visibility
-  mergeObject(createData,
-    {
-      "token.bar1": { "attribute": "health" },        // Default Bar 1 to Health 
-      "token.bar2": { "stat": "strength" },      // Default Bar 2 to Insanity
-      "token.displayName": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,     // Default display name to be on owner hover
-      "token.displayBars": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,     // Default display bars to be on owner hover
-      "token.disposition": disposition,                               // Default disposition to neutral
-      "token.name": createData.name                                   // Set token name to actor name
-    })
-
+  const tokenUpdates = {
+    "prototypeToken.bar1": { "attribute": "health" },
+    "prototypeToken.displayName": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+    "prototypeToken.displayBars": CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+    "prototypeToken.disposition": disposition,
+    "prototypeToken.name": createData.name
+  };
 
   if (createData.type == "character") {
-    createData.token.vision = true;
-    createData.token.actorLink = true;
+    tokenUpdates["prototypeToken.sight.enabled"] = true;
+    tokenUpdates["prototypeToken.actorLink"] = true;
   }
+
+  document.updateSource(tokenUpdates);
 })
 
 // async function preloadHandlebarsTemplates() {
@@ -163,7 +161,7 @@ async function createMausritterMacro(dropData, slot) {
     return null;
   }
   
-  mergeObject(macroData, {
+  foundry.utils.mergeObject(macroData, {
     name: itemData.name,
     img: itemData.img,
     command: `game.mausritter.rollItemMacro("${itemData.name}")`,
@@ -208,24 +206,17 @@ function rollItemMacro(itemName) {
  * @return {Promise}
  */
 function rollStatMacro() {
-  var selected = canvas.tokens.controlled;
   const speaker = ChatMessage.getSpeaker();
 
-  if (selected.length == 0) {
-    selected = game.actors.tokens[speaker.token];
+  let actor;
+  if (speaker.token) actor = canvas.scene?.tokens.get(speaker.token)?.actor;
+  if (!actor) actor = game.actors.get(speaker.actor);
+
+  if (!actor) {
+    ui.notifications.warn("No actor found. Please select a token.");
+    return;
   }
 
-  let actor;
-  if (speaker.token) actor = game.actors.tokens[speaker.token];
-  if (!actor) actor = game.actors.get(speaker.actor);
-  const stat = actor ? Object.entries(actor.system.stats) : null;
-
-
-  // if (stat == null) {
-  //   ui.notifications.info("Stat not found on token");
-  //   return;
-  // }
-
-
+  const stat = Object.entries(actor.system.stats);
   return actor.rollStatSelect(stat);
 }

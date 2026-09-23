@@ -1,5 +1,12 @@
-2024/07/28-12:00:02.735 1102c Log #3: 5 ops saved to Table #4 OK
-2024/07/28-12:00:02.735 1102c Archiving C:\Users\Futil\AppData\Local\FoundryVTT\Data\systems\mausritter\packs\mausritter-macros/000003.log: OK
-2024/07/28-12:00:02.737 1102c Table #4: 5 entries OK
-2024/07/28-12:00:02.738 1102c Archiving C:\Users\Futil\AppData\Local\FoundryVTT\Data\systems\mausritter\packs\mausritter-macros/MANIFEST-000002: OK
-2024/07/28-12:00:02.741 1102c **** Repaired leveldb C:\Users\Futil\AppData\Local\FoundryVTT\Data\systems\mausritter\packs\mausritter-macros; recovered 1 files; 4619 bytes. Some data may have been lost. ****
+2024/07/28-12:00:02.747 1102c Delete type=3 #1
+2024/07/28-13:54:39.289 1273c Level-0 table #8: started
+2024/07/28-13:54:39.291 1273c Level-0 table #8: 5220 bytes OK
+2024/07/28-13:54:39.292 1273c Delete type=0 #6
+2024/07/28-13:54:39.305 1273c Manual compaction at level-0 from '!macros!EjAi7W1jOj8v6zws' @ 72057594037927935 : 1 .. '!macros!MedvXgVpsy2iYgEs' @ 0 : 0; will stop at '!macros!MedvXgVpsy2iYgEs' @ 5 : 1
+2024/07/28-13:54:39.306 1273c Compacting 2@0 + 0@1 files
+2024/07/28-13:54:39.307 1273c Generated table #9@0: 5 keys, 5220 bytes
+2024/07/28-13:54:39.307 1273c Compacted 2@0 + 0@1 files => 5220 bytes
+2024/07/28-13:54:39.308 1273c compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/07/28-13:54:39.309 1273c Delete type=2 #4
+2024/07/28-13:54:39.309 1273c Delete type=2 #8
+2024/07/28-13:54:39.318 1273c Manual compaction at level-0 from '!macros!MedvXgVpsy2iYgEs' @ 5 : 1 .. '!macros!MedvXgVpsy2iYgEs' @ 0 : 0; will stop at (end)

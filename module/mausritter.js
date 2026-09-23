@@ -4,9 +4,11 @@ import { MausritterActorSheet } from "./actor/actor-sheet.js";
 import { MausritterHirelingSheet } from "./actor/hireling-sheet.js";
 import { MausritterCreatureSheet } from "./actor/creature-sheet.js";
 import { MausritterStorageSheet } from "./actor/storage-sheet.js";
+import { CharacterDataModel, HirelingDataModel, CreatureDataModel, StorageActorDataModel } from "./actor/actor-data-models.js";
 
 import { MausritterItem } from "./item/item.js";
 import { MausritterItemSheet } from "./item/item-sheet.js";
+import { ItemDataModel, WeaponDataModel, ArmorDataModel, StorageItemDataModel, ConditionDataModel, SpellDataModel } from "./item/item-data-models.js";
 
 import {
   registerSettings
@@ -38,6 +40,22 @@ Hooks.once('init', async function () {
   // Define custom Entity classes
   CONFIG.Actor.documentClass = MausritterActor;
   CONFIG.Item.documentClass = MausritterItem;
+
+  // Register system data models
+  CONFIG.Actor.dataModels = {
+    character: CharacterDataModel,
+    hireling: HirelingDataModel,
+    creature: CreatureDataModel,
+    storage: StorageActorDataModel
+  };
+  CONFIG.Item.dataModels = {
+    item: ItemDataModel,
+    weapon: WeaponDataModel,
+    armor: ArmorDataModel,
+    storage: StorageItemDataModel,
+    condition: ConditionDataModel,
+    spell: SpellDataModel
+  };
  
   // Define table data for character generator
   CONFIG.MAUSRITTER = {}

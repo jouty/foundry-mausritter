@@ -150,6 +150,22 @@
       "flags": {}
     }
   ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "hireling": {},
+      "creature": {},
+      "storage": {}
+    },
+    "Item": {
+      "item": {},
+      "weapon": {},
+      "armor": {},
+      "storage": {},
+      "condition": {},
+      "spell": {}
+    }
+  },
   "grid": {
     "units": "in",
     "distance": 1

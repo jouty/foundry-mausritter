@@ -28,7 +28,7 @@ export class MausritterStorageSheet extends ActorSheet {
             ...actor.toObject(false),
             cssClass: context.cssClass,
             editable: context.editable,
-            items: context.items,
+            items: context.items ?? actor.items.contents,
             actor: actor,
             dtypes: ["String", "Number", "Boolean"],
         };
